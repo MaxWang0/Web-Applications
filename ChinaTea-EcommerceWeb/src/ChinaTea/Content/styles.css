@@ -1,0 +1,24 @@
+﻿body{
+    margin-bottom:80px;
+}
+#top-navbar{
+    margin-bottom:0;
+    border-bottom:none;
+}
+
+#lower-nabar{
+    border-top:none;
+}
+
+.page-header{
+    margin:0;
+}
+
+.panel-body{
+    padding-top:0;
+}
+
+.tea-classification{
+    margin-bottom:15px;
+    width:100%;
+}

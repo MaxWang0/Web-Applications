@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>FoodBook Home</title>
+  <link rel="shortcut icon" href="http://imgur.com/Vs5slr2">
+  <link rel="icon" href="http://imgur.com/Vs5slr2">
+  <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+  
+  <div id="w">
+    <div id="content" class="clearfix">
+      <div id="userphoto"><img src="images/avatar.png" alt="default avatar"></div>
+      <h1>Mark Zuckerberg</h1>
+
+      <nav id="profiletabs">
+        <ul class="clearfix">
+          <li><a href="#bio" class="sel">Bio</a></li>
+          <li><a href="#settings">Photos</a></li>
+          <li><a href="#friends">Account</a></li>
+        </ul>
+      </nav>
+      
+      <section id="bio">
+        <p>CEO OF Facebook</p>
+      </section>
+          
+      <section id="friends" class="hidden">
+        <p class="setting"><span><strong>E-mail Address:</strong></span> lolno@gmail.com</p>
+        
+        <p class="setting"><span><a href="Home.html">Logout</a></span></p>
+      </section>
+      
+      <section id="settings" class="hidden">
+      
+        <div class="container gallery">
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/21BC9C/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: 21BC9C &amp; Image Foreground: FFFFFF</div>
+        </div>
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/33495E/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: 33495E &amp; Image Foreground: FFFFFF</div>
+        </div>
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/F1C42A/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: F1C42A &amp; Image Foreground: FFFFFF</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/2ECC71/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: 2ECC71 &amp; Image Foreground: FFFFFF</div>
+        </div>
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/E74C3C/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: E74C3C &amp; Image Foreground: FFFFFF</div>
+        </div>
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/3398DB/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: 3398DB &amp; Image Foreground: FFFFFF</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/798795/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: 798795 &amp; Image Foreground: FFFFFF</div>
+        </div>
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/FF0044/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: FF0044 &amp; Image Foreground: FFFFFF</div>
+        </div>
+        <div class="col-sm-4">
+            <img src="http://placehold.it/612x612/BDC3C7/FFFFFF&amp;text=loading" class="img-responsive">
+            <div class="caption">Image Background: BDC3C7 &amp; Image Foreground: FFFFFF</div>
+        </div>
+    </div>
+</div>
+
+    <script type="text/javascript">
+      $.getJSON('https://api.instagram.com/v1/tags/coding/media/recent?client_id=7f16584af46349ab8dfe312a14aded9e&callback=?', function(json) {
+  $.each(json.data, function(i,d) {
+    if($('.gallery img').eq(i).size()) {
+      $('.gallery img').eq(i).prop('src', d.images.standard_resolution.url);
+      $('.gallery .caption').eq(i).html(d.caption.text);
+    }
+  });
+});
+$('.gallery').find('.col-sm-4').popover({
+  container: 'body',
+  html: true,
+  trigger: 'hover',
+  content: function() {
+    return $(this).find('.caption').html();
+  },
+  placement: "auto bottom"
+});
+    </script>
+
+    <style type="text/css">
+      .gallery .caption { margin: 5px 0 15px; padding: 0 15px; }
+.gallery [class^="col-"] { padding: 0; }
+
+@media (min-width: 768px) {
+.gallery .row { margin: 0; }
+.gallery .caption { display: none; }
+}
+    </style>
+
+      </section>
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+<script type="text/javascript">
+$(function(){
+  $('#profiletabs ul li a').on('click', function(e){
+    e.preventDefault();
+    var newcontent = $(this).attr('href');
+    
+    $('#profiletabs ul li a').removeClass('sel');
+    $(this).addClass('sel');
+    
+    $('#content section').each(function(){
+      if(!$(this).hasClass('hidden')) { $(this).addClass('hidden'); }
+    });
+    
+    $(newcontent).removeClass('hidden');
+  });
+});
+</script>
+</body>
+</html>
